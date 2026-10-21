@@ -1,0 +1,388 @@
+body {
+  padding: 0 !important;
+}
+
+img {
+  object-fit: cover;
+}
+
+.dtb-popover-close {
+  display: none !important;
+}
+
+.td-image .avatar,
+.td-image .logo {
+  object-fit: cover !important;
+  cursor: pointer !important;
+}
+
+.td-image .avatar:hover,
+.td-image .logo:hover {
+  filter: brightness(0.9) !important;
+}
+
+/* The Modal (background) */
+.div-modal {
+  object-fit: cover;
+  z-index: 1100 !important;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal Content (Image) */
+.modal-img {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 65vh;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+.modal-img-caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 100vw;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-img,
+.modal-img-caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* The Close Button */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-img {
+    width: 100%;
+  }
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.swal2-container {
+  z-index: 1101;
+}
+
+.autocomplete-suggestions {
+  text-align: left;
+  border: 1px solid #999;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: #fff;
+  overflow: auto;
+}
+.autocomplete-suggestion {
+  padding: 5px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+.autocomplete-selected {
+  background: #f0f0f0;
+}
+.autocomplete-suggestions strong {
+  font-weight: normal;
+  color: #3399ff;
+}
+.autocomplete-group {
+  padding: 2px 5px;
+}
+.autocomplete-group strong {
+  display: block;
+  border-bottom: 1px solid #000;
+}
+
+.autocomplete-img {
+  width: 40px;
+  height: 40px;
+}
+
+.tox-promotion,
+.tox-statusbar__branding {
+  display: none;
+}
+
+.ui-sortable-placeholder {
+  display: inline-block;
+  visibility: inherit !important;
+  background: transparent;
+  border: #666 2px dashed;
+}
+
+.filepond--credits {
+  display: none;
+}
+
+#commentLists > div:nth-of-type(odd) {
+  background-color: #fafbfc;
+}
+
+/* ::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 6px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  -webkit-border-radius: 7px;
+  background-color: #c1c1c1;
+} */
+
+.filepond--file:hover {
+  cursor: pointer;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  min-height: 83vh;
+  overflow-x: auto;
+}
+
+.board-add-category {
+  width: 350px;
+  margin: 0 12px 30px 0px;
+  height: 100%;
+  border-radius: 12px !important;
+  background-color: #ffffff3d !important;
+  color: #172b4d;
+}
+
+.board-add-category:hover {
+  background-color: #091e4224 !important;
+  color: #172b4d;
+  cursor: pointer;
+}
+
+.board {
+  width: 350px;
+  margin: 0 12px 30px 0px;
+  height: 100%;
+  display: inline-block;
+}
+
+.board ul {
+  background-color: #e5e5e5e5;
+  border: 1px solid #d4d8df;
+  border-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.board .board-header {
+  background-color: #dbe3ff;
+  color: #3c55ab;
+
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.board .ticket-items .card {
+  border: 2px solid #ffffff;
+}
+
+.board .ticket-items .card:hover {
+  border: 2px solid var(--bs-secondary);
+}
+
+.board .ticket-items .card .card-body:hover {
+  cursor: pointer;
+}
+
+.card-drop-end a::after {
+  float: right;
+  color: black;
+  margin-top: 7px;
+}
+
+.card-drop-end a:active {
+  background-color: var(--bs-green);
+  color: var(--bs-white);
+  text-decoration: none;
+}
+
+/* .card-dropdown-menu {
+  display: none;
+}
+
+.card-drop-end:hover > .card-dropdown-menu {
+  display: block;
+}
+
+@media screen and (min-width: 769px) {
+  .card-drop-end:hover > .card-dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+} */
+
+/* ticket for search */
+#search-results {
+  float: left;
+  list-style: none;
+  margin-top: -3px;
+  padding: 0;
+  position: absolute;
+  font-size: 15px;
+  border: #c9c9c9 1px solid;
+  z-index: 1;
+  overflow: auto;
+  max-height: 50vh;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#search-results li {
+  padding: 10px;
+  background: #ffffff;
+  border-bottom: #c9c9c9 1px solid;
+  color: #111111;
+}
+
+#search-results li:hover:not(.noSearchRes) {
+  background: #198754;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#search-results li:hover:not(.noSearchRes) span {
+  color: #ffffff !important;
+}
+
+#search-results li:hover:not(.noSearchRes) {
+  color: #ffffff;
+}
+
+.choices__list--multiple .choices__item {
+  background-color: rgba(13, 110, 253, 1) !important;
+}
+
+div.hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+  text-align: center;
+  height: 0px !important;
+  line-height: 0px !important;
+}
+
+.hr-title {
+  background-color: #fff;
+}
+
+.comment-text-container p {
+  margin: 0;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  display: inline-flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: unset;
+  right: 12px;
+  cursor: pointer;
+}
+
+/* Style for text box */
+.text-box[contenteditable="true"]:focus {
+  outline: none;
+  border: 1px solid #0d6efd;
+}
+
+/* Toolbar Styling */
+.text-toolbar {
+  position: absolute;
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.text-toolbar button,
+.text-toolbar select {
+  margin-right: 5px;
+}
+
+.btnSign,
+.spanDate {
+  background: rgba(0, 255, 255, 0.27);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px dashed rgb(0, 139, 139);
+  width: 200px;
+  height: auto;
+  padding: 5px 10px;
+  /* z-index: 10; */
+  border-radius: 0.5rem;
+  cursor: grab;
+}
+
+.btnSign button {
+  position: relative;
+  z-index: 20;
+}
+
+.viewing-btn {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-close-icon {
+  position: absolute;
+  right: -5px;
+  top: -10px;
+  cursor: pointer;
+}

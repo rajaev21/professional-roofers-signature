@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+
+  Header set Access-Control-Allow-Origin "*"
+  
+  Options -Indexes 
+  Options -ExecCGI
+
+  RewriteEngine on
+  RewriteCond %{HTTPS} off 
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # For live (production)
+  ErrorDocument 403 https://%{HTTP_HOST}/error/403
+  ErrorDocument 404 https://%{HTTP_HOST}/error/404
+  ErrorDocument 500 https://%{HTTP_HOST}/error/500
+
+  # For localhost (preview)
+  <If "%{HTTP_HOST} == 'localhost' || %{HTTP_HOST} == '127.0.0.1'">
+    ErrorDocument 403 https://%{HTTP_HOST}/prime-seal-signatures/error/403
+    ErrorDocument 404 https://%{HTTP_HOST}/prime-seal-signatures/error/404
+    ErrorDocument 500 https://%{HTTP_HOST}/prime-seal-signatures/error/500
+  </If>
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.php -f
+  RewriteRule ^(.*)$ $1.php [NC,L] 
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.*)$ $1.html [NC,L]
+</IfModule>
