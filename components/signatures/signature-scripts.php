@@ -85,6 +85,8 @@
   }
 
   function handlePopulateBtnToPage(type, selectedSigner, includeDate) {
+    let addedSignature = false;
+
     $('.page').each((i, el) => {
       if ($(el).isOnScreen()) {
         const pageNumber = i + 1;
@@ -92,10 +94,13 @@
         const signId = generateUniqueId(`primary_${selectedSigner}_sign_${pageNumber}`);
 
         populateButton(type, selectedSigner, includeDate, pageNumber, signId, spanDateId, "add");
-
-        saveTemplateConfig(templateConfigArr, "signature");
+        addedSignature = true;
       }
-    })
+    });
+
+    if (addedSignature) {
+      saveTemplateConfig(templateConfigArr, "signature");
+    }
   }
 
   function populateButton(type, selectedSigner, includeDate, pageNumber, signId, spanDateId, action) {
@@ -273,11 +278,18 @@
     textBoxId = textBoxId || generateTextBoxId();
 
     if (type == "custom_text") {
+      let addedText = false;
+
       $('.page').each((i, el) => {
         if ($(el).isOnScreen()) {
           populateTextToCanvas(textBoxId, type, i + 1, "add");
+          addedText = true;
         }
       });
+
+      if (addedText) {
+        saveTemplateConfig(textBoxData, "text");
+      }
     } else {
       let textType = "";
 
@@ -316,11 +328,21 @@
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancel'
       }).then((result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
+
+        let addedText = false;
         $('.page').each((i, el) => {
           if ($(el).isOnScreen()) {
             populateTextToCanvas(textBoxId, type, i + 1, "add", result.value.signer);
+            addedText = true;
           }
         });
+
+        if (addedText) {
+          saveTemplateConfig(textBoxData, "text");
+        }
       });
     }
   }
@@ -667,22 +689,25 @@
       $("#useTemplateBtn").hide();
     }
 
-    if (!$("#savingMessage").is(":visible")) {
-      $("#savingMessage").show();
-      setTimeout(function() {
-        $("#savingMessage").hide();
-      }, 1000);
-    }
+    $("#savingMessage").show();
   }
 
-  async function saveTemplateConfig(config, type = "signature") {
+  let templateConfigSaveQueue = Promise.resolve();
+
+  function saveTemplateConfig(config, type = "signature") {
     const action = type === "signature" ? "save_sign_config" : "save_text_config";
+    const serializedConfig = JSON.stringify(config);
 
     showHeaderSaving();
-    return new Promise((resolve, reject) => {
+
+    const saveRequest = templateConfigSaveQueue.then(() => new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "<?= SERVER_NAME . '/backend/nodes' ?>", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      const csrfToken = $('meta[name="csrf-token"]').attr('content');
+      if (csrfToken) {
+        xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+      }
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
@@ -691,20 +716,42 @@
               if (newCsrfToken) {
                 $('meta[name="csrf-token"]').attr('content', newCsrfToken);
               }
-              resolve(JSON.parse(xhr.responseText));
+              const response = JSON.parse(xhr.responseText);
+              if (!response.success) {
+                reject(new Error(response.message || "The template configuration was not saved."));
+                return;
+              }
+              resolve(response);
             } catch (e) {
-              resolve(xhr.responseText);
+              reject(e);
             }
           } else {
-            resolve({
-              success: false,
-              message: `Error: ${xhr.responseText}`
-            });
+            reject(new Error(`Error: ${xhr.responseText || xhr.statusText}`));
           }
         }
       };
-      const params = `action=${action}&id=${encodeURIComponent($("#templateId").val())}&config=${encodeURIComponent(JSON.stringify(config))}`;
+      xhr.onerror = function() {
+        reject(new Error("A network error prevented the template configuration from being saved."));
+      };
+      const params = `action=${action}&id=${encodeURIComponent($("#templateId").val())}&config=${encodeURIComponent(serializedConfig)}`;
       xhr.send(params);
+    })).catch(error => {
+      console.error("Error saving template configuration:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Unable to save template",
+        text: error.message || "The template configuration could not be saved."
+      });
+      return null;
     });
+
+    templateConfigSaveQueue = saveRequest;
+    saveRequest.then(() => {
+      if (templateConfigSaveQueue === saveRequest) {
+        $("#savingMessage").hide();
+      }
+    });
+
+    return saveRequest;
   }
 </script>

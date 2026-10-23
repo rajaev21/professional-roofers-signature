@@ -558,6 +558,10 @@ if ($signerNames) {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "<?= SERVER_NAME . "/backend/nodes" ?>", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      const csrfToken = $('meta[name="csrf-token"]').attr('content');
+      if (csrfToken) {
+        xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+      }
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
           try {
