@@ -2,7 +2,7 @@
   <div class="sidebar-header border-bottom d-flex justify-content-center align-items-center">
     <div class="sidebar-brand">
       <a href="<?= SERVER_NAME . "/views/dashboard" ?>">
-        <img src="<?= SERVER_NAME . "/images/professional-roofers-logo-dark.png" ?>" alt="Logo" class="d-inline-block align-text-top img-fluid" width="150px">
+        <img src="<?= SERVER_NAME . "/images/prnm-logo-dark.png" ?>" alt="Professional Roofers" class="d-inline-block align-text-top img-fluid" width="150px">
       </a>
     </div>
     <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" aria-label="Close" onclick='coreui.Sidebar.getInstance(document.querySelector("#sidebar")).toggle()'></button>

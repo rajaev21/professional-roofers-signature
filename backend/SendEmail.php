@@ -17,8 +17,8 @@ class SendEmail
   {
     // $this->host = "gator4146.hostgator.com";
     $this->host       = 'smtp.gmail.com';
-    $this->userName   = 'email.primeenergysolar@gmail.com';
-    $this->password   = 'yzxx mhoo jhiv biah';
+    $this->userName   = 'professionalroofersnearmeco@gmail.com';
+    $this->password   = 'gnin oacw tslm hhog';
     // $this->host = "mail.primesealsignatures.com";
     // $this->userName = "mail@primesealsignatures.com";
     // $this->password = "D,do_Vl(-uJ1";

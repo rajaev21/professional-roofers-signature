@@ -20,7 +20,7 @@ $pageTitle = "Login";
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12 d-flex justify-content-center align-items-center">
-                  <img src="<?= SERVER_NAME . "/images/professional-roofers-logo-dark.png" ?>" style="max-width: 280px; height: auto;" alt="Logo">
+                  <img src="<?= SERVER_NAME . "/images/prnm-logo.png" ?>" style="max-width: 280px; height: auto;" alt="Professional Roofers">
                 </div>
               </div>
               <h5 class="card-title text-center">Log in to your account</h5>
